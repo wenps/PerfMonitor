@@ -27,30 +27,26 @@ function getLCP() { // 最大内容渲染时间
 async function getTTI() { // 最早可交互时间，以第一个长任务暂代
     return new Promise((resolve, reject) => {
         new PerformanceObserver((list) => {
-            for (const entry of list.getEntries()) {
-                resolve(entry.startTime);
-            }
+            const entry = list.getEntries()[0];
+            resolve(entry.startTime);
         }).observe({ entryTypes: ['longtask'] });
     });
 }
 
 function getDCL() { // 当初始的 HTML 文档被完全加载和解析完成之后，DOMContentLoaded事件被触发，而无需等待样式表、图像和子框架的完全加载。
     return new Promise((resolve, reject) => {
-        document.addEventListener('DOMContentLoaded', function() { 
-            resolve(+new Date() - timing.navigationStart)
-         }, false);
-    })
+        resolve(timing.domContentLoadedEventStart - timing.navigationStart);
+    });
 }
 
 function getFID() { //用户第一次与页面交互，直到浏览器对交互作出响应，并实际能够开始处理事件处理程序所经过的时间。
     return new Promise((resolve, reject) => {
         new PerformanceObserver((entryList) => {
-            const entries = entryList.getEntries();
-            const entry:any = entries[entries.length - 1];
+            const entry:any = entryList.getEntries()[entryList.getEntries().length - 1];
             const delay = entry.processingStart - entry.startTime;
             resolve(delay);
         }).observe({ type: 'first-input', buffered: true });
-    })
+    });
 }
 
 // TODO 基于MutationObserver 实现更精准的首屏时间获取

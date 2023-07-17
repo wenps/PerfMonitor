@@ -30,7 +30,7 @@ export function sendAjax({ req = '', params }: reportParams, ...args: any[]) {
             .then(() => resolve(true))
             .catch(() => reject(false));
         } else {
-        reject(false);
+            reject(false);
         }
     });
 }

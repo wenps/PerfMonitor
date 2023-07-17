@@ -2,7 +2,7 @@ import { EVENT_REPORT_FUNCTION_MAP, IMG, BEACON, AJAX } from "../../constant/rep
 import { reportParams } from "../../interfaces/report";
 
 // 基础上报函数
-export async function reportEvent(params: reportParams, reportType:string[] = [IMG, BEACON, AJAX], ...args: Exclude<any, { reportType: any }>[]) {
+export async function reportEvent(params: reportParams, reportType:string[] = [IMG, BEACON, AJAX], ...args:any[]) {
     let finalType = false
     for (const key in reportType) {
         if (!finalType) {

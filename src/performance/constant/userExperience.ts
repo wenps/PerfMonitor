@@ -1,4 +1,4 @@
-import { getFID, getLCP, getFCP, getTTFB, getDCL, getTTI, getFP } from "../uitls/perfEvent";
+import { getFID, getLCP, getFCP, getTTFB, getDCL, getTTI, getFP } from "../uitls/userExperienceEvent";
 
 // 首次输入延迟
 const FID = 'FIRST_INPUT_DELAY';
@@ -27,7 +27,7 @@ const PERFORMANCE_INDEX_MAP = {
     [TTFB]: getTTFB
 }
 
-export {
+export default {
     FID,
     DCL,
     TTI,

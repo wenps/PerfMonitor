@@ -1,4 +1,4 @@
-import { getRT, getDNS, getTCP, getTTFB, getREQ, getDOM, getRES, getTOTAL, getUPLOAD, getRESARR } from '../uitls/performanceEvent';
+import { getRT, getDNS, getTCP, getTTFB, getREQ, getDOM, getRES, getTOTAL, getUPLOAD, getRESARR } from '../event/performanceEvent';
 
 const RT = 'REDIRECT_TIME';
 const TCP = 'TCP_TIME';

@@ -1,4 +1,4 @@
-import { sendAjax, sendBeacon, sendImg } from "../utils/reportEvent";
+import { sendAjax, sendBeacon, sendImg } from "../event/reportEvent";
 
 export const IMG = 'img'
 export const BEACON = 'beacon'

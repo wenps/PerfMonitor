@@ -1,4 +1,4 @@
-import { getFID, getLCP, getFCP, getTTFB, getDCL, getTTI, getFP, getLOAD } from '../uitls/userExperienceEvent';
+import { getFID, getLCP, getFCP, getTTFB, getDCL, getTTI, getFP, getLOAD } from '../event/userExperienceEvent';
 
 // 首次输入延迟
 const FID = 'FIRST_INPUT_DELAY';

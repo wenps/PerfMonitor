@@ -51,9 +51,12 @@ const getUPLOAD = async () => {
 };
 
 const getRESARR = () => {
+    // 静态资源
     return new Promise((resolve, reject) => {
         const resource = performance.getEntriesByType('resource');
+        let cacheHit = 0
         const formatResourceArray = resource.map((item:any) => {
+            if (item.duration == 0 && item.transferSize !== 0) cacheHit++;
             return {
                 startTime: item.startTime, //开始
                 EndTime: item.responseEnd, //结束
@@ -65,7 +68,7 @@ const getRESARR = () => {
                 loadTime: deV(item, ['responseEnd'], 0) - deV(item, ['responseStart'], 0) // 加载时长
             };
         });
-        resolve(formatResourceArray);
+        resolve({formatResourceArray, cacheHit: (cacheHit / resource.length).toFixed(2) });
     });
 };
 

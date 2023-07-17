@@ -1,4 +1,4 @@
-import { EVENT_REPORT_FUNCTION_MAP, IMG, BEACON, AJAX } from "../../constant/report";
+import { EVENT_REPORT_FUNCTION_MAP, IMG, BEACON, AJAX } from "../constant/report";
 import { reportParams } from "../../interfaces/report";
 
 // 基础上报函数

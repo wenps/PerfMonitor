@@ -52,3 +52,6 @@ export function getFID() { //用户第一次与页面交互，直到浏览器对
         }).observe({ type: 'first-input', buffered: true });
     })
 }
+
+// TODO 基于MutationObserver 实现更精准的首屏时间获取
+// TODO CLS 布局偏移计算

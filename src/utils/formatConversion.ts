@@ -7,3 +7,16 @@ export function objectToQueryString(obj:Object):String {
     }
     return params.toString();
 }
+
+export function deV(data: Object, props: Array<string>, defaultValue: any) {
+    let value = data;
+    for (const prop of props) {
+      if (value && value.hasOwnProperty(prop)) {
+        value = value[prop];
+      } else {
+        value = '';
+        break;
+      }
+    }
+    return value || defaultValue;
+}

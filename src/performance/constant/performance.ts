@@ -1,17 +1,17 @@
 import { getRT, getDNS, getTCP, getTTFB, getREQ, getDOM, getRES, getTOTAL, getUPLOAD, getRESARR } from '../event/performanceEvent';
 
-const RT = 'REDIRECT_TIME';
-const TCP = 'TCP_TIME';
-const TTFB = 'RESPONSE_TIME';
-const REQ = 'REQUEST_TIME';
-const DOM = 'DOM_PARSE_TIME';
-const RES = 'RESOURCE_LOAD_TIME';
-const TOTAL = 'TOTAL_TIME';
-const UPLOAD = 'UNLOAD_TIME';
-const DNS = 'DNS_TIME';
-const RESARR = 'RESOURCE_ARR'
+export const RT = 'REDIRECT_TIME';
+export const TCP = 'TCP_TIME';
+export const TTFB = 'RESPONSE_TIME';
+export const REQ = 'REQUEST_TIME';
+export const DOM = 'DOM_PARSE_TIME';
+export const RES = 'RESOURCE_LOAD_TIME';
+export const TOTAL = 'TOTAL_TIME';
+export const UPLOAD = 'UNLOAD_TIME';
+export const DNS = 'DNS_TIME';
+export const RESARR = 'RESOURCE_ARR'
 
-const PERFORMANCE_INDEX_MAP = {
+export const PERFORMANCE_INDEX_MAP = {
     [RT]: getRT,
     [TCP]: getTCP,
     [TTFB]: getTTFB,
@@ -22,18 +22,4 @@ const PERFORMANCE_INDEX_MAP = {
     [UPLOAD]: getUPLOAD,
     [DNS]: getDNS,
     [RESARR]: getRESARR, 
-};
-
-export default {
-    RT,
-    TCP,
-    TTFB,
-    REQ,
-    DOM,
-    RES,
-    TOTAL,
-    UPLOAD,
-    DNS,
-    RESARR,
-    PERFORMANCE_INDEX_MAP
 };

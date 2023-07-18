@@ -1,12 +1,15 @@
 import { performance } from '../../interfaces/performance';
-import { reportParams } from "../../interfaces/report";
+import { reportParams } from '../../interfaces/report';
 import { performanceIndexFn, userExperienceIndexFn } from '../../performance/index';
-import { reportEvent } from "../../report/index";
+import { RT, TCP, TTFB, REQ, DOM, RES, TOTAL, UPLOAD, DNS, RESARR } from '../../performance/index';
+import { FID, DCL, TTI, LCP, FCP, FP, FBT, CLS, LOAD } from '../../performance/index';
+import { reportEvent } from '../../report/index';
+
 
 // 性能核心对象
 export class performanceCore {
-    performanceTypes: string[];
-    userExperienceTypes: string[];
+    performanceTypes = [RT, TCP, TTFB, REQ, DOM, RES, TOTAL, UPLOAD, DNS, RESARR];
+    userExperienceTypes = [FID, DCL, TTI, LCP, FCP, FP, FBT, CLS, LOAD];
     reportTypes: string[];
     report: reportParams;
     reportMap = {

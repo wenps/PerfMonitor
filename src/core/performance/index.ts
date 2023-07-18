@@ -25,6 +25,7 @@ export class performanceCore {
         if(data.performanceTypes.length != 0) this.performanceTypes = data.performanceTypes
         if(data.userExperienceTypes.length != 0) this.userExperienceTypes = data.userExperienceTypes
     }
+
     // 浏览器性能上报
     public performanceReport(data:object, transform: Function[]) {
         const cpReport = JSON.parse(JSON.stringify(this.report))
@@ -32,6 +33,7 @@ export class performanceCore {
         cpReport.params = {...data}
         this.reportFn('performance', this.performanceTypes, transform, cpReport)
     }
+
     // 用户性能上报
     public userExperienceReport(data:object, transform: Function[]) {
         const cpReport = JSON.parse(JSON.stringify(this.report))
@@ -39,6 +41,7 @@ export class performanceCore {
         cpReport.params = {...data}
         this.reportFn('userExperience', this.userExperienceTypes, transform, cpReport)
     }
+    
     // 上报函数
     private reportFn(key:string, type:string[], transform: Function[], report: reportParams) {
         this.reportMap[key](type).then((res) => {

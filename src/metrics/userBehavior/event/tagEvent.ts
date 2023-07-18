@@ -5,3 +5,9 @@ export function getClickInfo(Fn:Function, transform: Function[], report: reportP
         Fn({target:e}, transform, report)
     })
 }
+
+export function getInputInfo(Fn:Function, transform: Function[], report: reportParams) {
+    window.addEventListener('input', (e)=>{
+        Fn({target:e}, transform, report)
+    })
+}

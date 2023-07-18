@@ -1,4 +1,4 @@
-import { getClickInfo } from "../event/clickEvent";
+import { getClickInfo, getInputInfo } from "../event/tagEvent";
 import { getPageInfo } from "../event/pageInfoEvent";
 import { getHashRouter, getHistoryRouter } from "../event/routerEvent";
 
@@ -10,6 +10,14 @@ export const ROUTER_EVENT_MAP = {
     [HISTORY]: getHistoryRouter
 }
 
+export const CLICK = 'CLICK_EVENT'
+export const INPUT = 'INPUT_EVENT'
+
+export const TAG_EVENT_MAP = {
+    [CLICK]: getClickInfo,
+    [INPUT]: getInputInfo
+}
+
+
 export const GET_PAGE_INFO = getPageInfo
-export const GET_CLICK_INFO =getClickInfo
 

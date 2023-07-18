@@ -1,5 +1,6 @@
 import { getClickInfo, getInputInfo } from "../event/tagEvent";
 import { getPageInfo } from "../event/pageInfoEvent";
+import { getUserAgentInfo } from "../event/userAgentEvent";
 import { getHashRouter, getHistoryRouter } from "../event/routerEvent";
 
 export const HASH = 'HASH_ROUTER'
@@ -20,4 +21,5 @@ export const TAG_EVENT_MAP = {
 
 
 export const GET_PAGE_INFO = getPageInfo
+export const GET_USER_AGENT_INFO = getUserAgentInfo
 

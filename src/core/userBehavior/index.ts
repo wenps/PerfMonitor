@@ -1,6 +1,6 @@
 import { reportParams } from '../../interfaces/report';
 import { userBehavior } from '../../interfaces/userBehavior';
-import { ROUTER_EVENT_MAP, TAG_EVENT_MAP, GET_PAGE_INFO } from "../../metrics/index";
+import { ROUTER_EVENT_MAP, TAG_EVENT_MAP, GET_PAGE_INFO, GET_USER_AGENT_INFO } from "../../metrics/index";
 import { reportEventFn } from '../../report';
 import { transformFn } from '../../utils/transform';
 
@@ -28,7 +28,16 @@ export class userBehaviorCore {
         this.reportInfoFn({...pageInfo, ...data}, transform, cpReport)
     }
 
-    // 路由监听
+    // 用户代理上报
+    public reportUserAgentInfo(data:Object, transform:Function[]) {
+        const cpReport = JSON.parse(JSON.stringify(this.report))
+        // 暂存默认参数
+        cpReport.params = {...data}
+        const pageInfo = GET_USER_AGENT_INFO()
+        this.reportInfoFn({...pageInfo, ...data}, transform, cpReport)
+    }
+
+    // 路由上报
     public reportRouterInfo(data:Object, transform:[]) {
         this.routerTypes.map((item, index) => {
             const cpReport = JSON.parse(JSON.stringify(this.report))
@@ -38,7 +47,7 @@ export class userBehaviorCore {
         })
     }
 
-    // 点击监听
+    // 标签事件上报
     public reportTagInfo(data:Object, transform:[]) {
         this.tagTypes.map((item, index) => {
             const cpReport = JSON.parse(JSON.stringify(this.report))
@@ -48,7 +57,7 @@ export class userBehaviorCore {
         })
     }
 
-    // 变更上报
+    // 上报函数
     private reportInfoFn(data:Object, transform: Function[], report: reportParams) {
         report.params = { ...data, ...report.params };
         // 对数据格式进行操作

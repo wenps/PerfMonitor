@@ -60,6 +60,7 @@ export class userBehaviorCore {
         })
     }
 
+    // Http上报
     public reportHttpInfo(data:Object, transform:[]) {
         this.httpTypes.map((item, index) => {
             const cpReport = JSON.parse(JSON.stringify(this.report))

@@ -17,12 +17,12 @@ export class performanceCore {
         'userExperience': userExperienceIndexFn
     }
     constructor(data: performance) {
-        [this.report, this.reportTypes, this.performanceTypes, this.userExperienceTypes] = [
+        [this.report, this.reportTypes] = [
             data.reportParams,
-            data.reportTypes,
-            data.performanceTypes,
-            data.userExperienceTypes
+            data.reportTypes
         ];
+        if(data.performanceTypes.length != 0) this.performanceTypes = data.performanceTypes
+        if(data.userExperienceTypes.length != 0) this.userExperienceTypes = data.userExperienceTypes
     }
     // 浏览器性能上报
     public performanceReport(data:object) {

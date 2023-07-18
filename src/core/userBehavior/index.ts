@@ -1,13 +1,13 @@
 import { reportParams } from '../../interfaces/report';
 import { userBehavior } from '../../interfaces/userBehavior';
-import { ROUTER_EVENT_MAP, HASH, HISTORY, GET_PAGE_INFO, TAG_EVENT_MAP, CLICK, INPUT } from "../../metrics/index";
+import { ROUTER_EVENT_MAP, TAG_EVENT_MAP, GET_PAGE_INFO } from "../../metrics/index";
 import { reportEventFn } from '../../report';
 import { transformFn } from '../../utils/transform';
 
 // 用户行为核心对象
 export class userBehaviorCore {
-    routerTypes = [HASH, HISTORY];
-    tagTypes = [CLICK, INPUT];
+    routerTypes = [...Object.keys(ROUTER_EVENT_MAP)];
+    tagTypes = [...Object.keys(TAG_EVENT_MAP)];
     reportTypes: string[];
     report: reportParams;
     

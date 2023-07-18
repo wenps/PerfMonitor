@@ -1,16 +1,16 @@
 import { performance } from '../../interfaces/performance';
 import { reportParams } from '../../interfaces/report';
 import { performanceIndexFn, userExperienceIndexFn } from '../../metrics/index';
-import { RT, TCP, TTFB, REQ, DOM, RES, TOTAL, UPLOAD, DNS, RESARR } from '../../metrics/index';
-import { FID, DCL, TTI, LCP, FCP, FP, FBT, CLS, LOAD } from '../../metrics/index';
+import { PERFORMANCE_INDEX_MAP } from '../../metrics/index';
+import { USER_EXPERIENCE_INDEX_MAP } from '../../metrics/index';
 import { reportEventFn } from '../../report';
 import { transformFn } from '../../utils/transform';
 
 
 // 性能核心对象
 export class performanceCore {
-    performanceTypes = [RT, TCP, TTFB, REQ, DOM, RES, TOTAL, UPLOAD, DNS, RESARR];
-    userExperienceTypes = [FID, DCL, TTI, LCP, FCP, FP, FBT, CLS, LOAD];
+    performanceTypes = [...Object.keys(PERFORMANCE_INDEX_MAP)];
+    userExperienceTypes = [...Object.keys(USER_EXPERIENCE_INDEX_MAP)];
     reportTypes: string[];
     report: reportParams;
     reportMap = {
@@ -41,7 +41,7 @@ export class performanceCore {
         cpReport.params = {...data}
         this.reportFn('userExperience', this.userExperienceTypes, transform, cpReport)
     }
-    
+
     // 上报函数
     private reportFn(key:string, type:string[], transform: Function[], report: reportParams) {
         this.reportMap[key](type).then((res) => {

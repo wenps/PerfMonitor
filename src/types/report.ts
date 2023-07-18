@@ -4,3 +4,8 @@ export interface reportParams {
     req?: string;
     params: object;
 }
+
+export interface reportObj {
+    report: reportParams;
+    reportTypes: string[]
+}

@@ -1,4 +1,4 @@
-import { reportParams } from '../../../interfaces/report';
+import { reportParams } from '../../../types/report';
 import { getPageInfo } from './pageInfoEvent';
 
 export function getHashRouter(fn: Function, transform: Function[], report: reportParams) {

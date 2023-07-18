@@ -1,5 +1,5 @@
 import { EVENT_REPORT_FUNCTION_MAP, IMG, BEACON, AJAX } from "../constant/report";
-import { reportParams } from "../../interfaces/report";
+import { reportParams } from "../../types/report";
 
 // 基础上报函数
 export async function reportEvent(params: reportParams, reportType:string[] = [IMG, BEACON, AJAX], ...args:any[]) {

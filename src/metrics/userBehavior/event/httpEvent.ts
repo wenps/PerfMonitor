@@ -1,4 +1,4 @@
-import { reportParams } from "../../../interfaces/report"
+import { reportParams } from "../../../types/report"
 
 export function getHttpFetchInfo(fn:Function, transform: Function[], report: reportParams) {
     // 劫持fetch

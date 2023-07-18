@@ -1,4 +1,4 @@
-import { reportParams } from "../../interfaces/report";
+import { reportParams } from "../../types/report";
 import { postAction } from "../../utils/ajaxManage";
 import { objectToQueryString } from "../../utils/formatConversion";
 

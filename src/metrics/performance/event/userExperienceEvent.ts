@@ -1,4 +1,4 @@
-import { getTiming } from '../../utils/getPerformance';
+import { getTiming } from '../../../utils/getPerformance';
 const timing: any = getTiming();
 
 async function getTTFB() {

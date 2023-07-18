@@ -1,8 +1,8 @@
 import { performance } from '../../interfaces/performance';
 import { reportParams } from '../../interfaces/report';
-import { performanceIndexFn, userExperienceIndexFn } from '../../performance/index';
-import { RT, TCP, TTFB, REQ, DOM, RES, TOTAL, UPLOAD, DNS, RESARR } from '../../performance/index';
-import { FID, DCL, TTI, LCP, FCP, FP, FBT, CLS, LOAD } from '../../performance/index';
+import { performanceIndexFn, userExperienceIndexFn } from '../../metrics/index';
+import { RT, TCP, TTFB, REQ, DOM, RES, TOTAL, UPLOAD, DNS, RESARR } from '../../metrics/index';
+import { FID, DCL, TTI, LCP, FCP, FP, FBT, CLS, LOAD } from '../../metrics/index';
 import { reportEvent } from '../../report/index';
 
 

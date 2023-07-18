@@ -1,5 +1,5 @@
-import { deV } from '../../utils/formatConversion';
-import { getTiming } from '../../utils/getPerformance';
+import { deV } from '../../../utils/formatConversion';
+import { getTiming } from '../../../utils/getPerformance';
 const timing: any = getTiming();
 
 const getRT = async () => {

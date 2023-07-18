@@ -19,8 +19,7 @@ export class userBehaviorCore {
     // 页面基础信息上报
     public reportPageInfo(data:Object) {
         const pageInfo = GET_PAGE_INFO()
-        this.report.params = {...pageInfo, ...data}
-        reportEventFn(this.report, this.reportTypes)
+        this.reportInfoFn({...pageInfo, ...data})
     }
 
     // 路由监听

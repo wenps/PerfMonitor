@@ -3,7 +3,7 @@ import { reportParams } from '../../interfaces/report';
 import { performanceIndexFn, userExperienceIndexFn } from '../../metrics/index';
 import { RT, TCP, TTFB, REQ, DOM, RES, TOTAL, UPLOAD, DNS, RESARR } from '../../metrics/index';
 import { FID, DCL, TTI, LCP, FCP, FP, FBT, CLS, LOAD } from '../../metrics/index';
-import { reportEvent } from '../../report/index';
+import { reportEventFn } from '../../report';
 
 
 // 性能核心对象
@@ -34,14 +34,11 @@ export class performanceCore {
         this.report.params = {...data}
         this.reportFn('userExperience', this.userExperienceTypes)
     }
+    // 上报函数
     private reportFn(key:string, type:string[]) {
         this.reportMap[key](type).then((res) => {
             this.report.params = {...this.report.params, ...res}
-            if (this.reportTypes.length == 0) {
-                reportEvent(this.report)
-            } else {
-                reportEvent(this.report, this.reportTypes)
-            }
+            reportEventFn(this.report, this.reportTypes)
         })
     }
 }

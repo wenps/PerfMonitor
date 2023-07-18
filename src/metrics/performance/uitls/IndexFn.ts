@@ -3,7 +3,7 @@ import {PERFORMANCE_INDEX_MAP} from "../constant/performance"
 import {USER_EXPERIENCE_INDEX_MAP} from "../constant/userExperience"
 
 // 指标函数
-export function IndexFn(types:string[], map: Object) {
+function IndexFn(types:string[], map: Object) {
     const promiseList = []
     types.map(item => {
         promiseList.push(map[item]())

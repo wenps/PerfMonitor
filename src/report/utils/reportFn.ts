@@ -32,3 +32,12 @@ export function reportAjaxEvent(params: reportParams, ...args: any[]) {
 export function reportBeaconEvent(params: reportParams, ...args: any[]) {
     return reportEvent(params, [BEACON], ...args)
 }
+
+// core核心上报方法
+export function reportEventFn( reportParams:reportParams, reportTypes:string[] = []) {
+    if (reportTypes.length == 0) {
+        reportEvent(reportParams)
+    } else {
+        reportEvent(reportParams, reportTypes)
+    }
+}

@@ -1,7 +1,7 @@
-import { reportEvent } from '../../report/index';
 import { reportParams } from '../../interfaces/report';
 import { userBehavior } from '../../interfaces/userBehavior';
-import { ROUTER_EVENT_MAP, HASH, HISTORY, GET_PAGE_INFO } from "../../metrics/index";
+import { ROUTER_EVENT_MAP, HASH, HISTORY, GET_PAGE_INFO, GET_CLICK_INFO } from "../../metrics/index";
+import { reportEventFn } from '../../report';
 
 // 用户行为核心对象
 export class userBehaviorCore {
@@ -20,30 +20,28 @@ export class userBehaviorCore {
     public reportPageInfo(data:Object) {
         const pageInfo = GET_PAGE_INFO()
         this.report.params = {...pageInfo, ...data}
-        this.reportEventFn()
+        reportEventFn(this.report, this.reportTypes)
     }
 
     // 路由监听
     public reportRouterInfo(data:Object) {
         // 暂存默认参数
         this.report.params = {...data}
-        this.reportTypes.map(item => {
-            ROUTER_EVENT_MAP[item](this.reportRouterInfoFn)
+        this.routerTypes.map(item => {
+            ROUTER_EVENT_MAP[item](this.reportInfoFn)
         })
     }
 
-    // 路由变更上报
-    private reportRouterInfoFn(data:Object) {
-        this.report.params = {...data, ...this.report.params}
-        this.reportEventFn()
+    // 点击监听
+    public reportClickInfo(data:Object) {
+        // 暂存默认参数
+        this.report.params = {...data}
+        GET_CLICK_INFO(this.reportInfoFn)
     }
 
-    // 上报函数
-    private reportEventFn() {
-        if (this.reportTypes.length == 0) {
-            reportEvent(this.report)
-        } else {
-            reportEvent(this.report, this.reportTypes)
-        }
+    // 变更上报
+    private reportInfoFn(data:Object) {
+        this.report.params = { ...data, ...this.report.params };
+        reportEventFn(this.report, this.reportTypes);
     }
 }

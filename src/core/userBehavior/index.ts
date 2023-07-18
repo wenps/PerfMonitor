@@ -1,6 +1,6 @@
 import { reportParams } from '../../interfaces/report';
 import { userBehavior } from '../../interfaces/userBehavior';
-import { ROUTER_EVENT_MAP, TAG_EVENT_MAP, GET_PAGE_INFO, GET_USER_AGENT_INFO } from "../../metrics/index";
+import { ROUTER_EVENT_MAP, TAG_EVENT_MAP, HTTP_EVENT_MAP, GET_PAGE_INFO, GET_USER_AGENT_INFO } from "../../metrics/index";
 import { reportEventFn } from '../../report';
 import { transformFn } from '../../utils/transform';
 
@@ -8,6 +8,7 @@ import { transformFn } from '../../utils/transform';
 export class userBehaviorCore {
     routerTypes = [...Object.keys(ROUTER_EVENT_MAP)];
     tagTypes = [...Object.keys(TAG_EVENT_MAP)];
+    httpTypes = [...Object.keys(HTTP_EVENT_MAP)];
     reportTypes: string[];
     report: reportParams;
     
@@ -18,7 +19,9 @@ export class userBehaviorCore {
         ];
         if(data.routerTypes.length != 0) this.routerTypes = data.routerTypes
         if(data.tagTypes.length != 0) this.tagTypes = data.tagTypes
+        if(data.httpTypes.length != 0) this.httpTypes = data.httpTypes
     }
+
     // 页面基础信息上报
     public reportPageInfo(data:Object, transform:Function[]) {
         const cpReport = JSON.parse(JSON.stringify(this.report))
@@ -54,6 +57,15 @@ export class userBehaviorCore {
             // 暂存默认参数
             cpReport.params = {...data}
             TAG_EVENT_MAP[item](this.reportInfoFn, transform[index], cpReport)
+        })
+    }
+
+    public reportHttpInfo(data:Object, transform:[]) {
+        this.httpTypes.map((item, index) => {
+            const cpReport = JSON.parse(JSON.stringify(this.report))
+            // 暂存默认参数
+            cpReport.params = {...data}
+            HTTP_EVENT_MAP[item](this.reportInfoFn, transform[index], cpReport)
         })
     }
 

@@ -1,4 +1,4 @@
-import { reportEventFn } from '../../../report'
+import { augmentReportFn, reportEventFn } from '../../../report'
 import { transformFn } from '../../../utils/transform'
 import {reportObj, reportParams} from '../../../types/report'
 import { ROUTER_EVENT_MAP, TAG_EVENT_MAP, HTTP_EVENT_MAP, GET_PAGE_INFO, GET_USER_AGENT_INFO } from "../../../metrics/index";
@@ -38,7 +38,7 @@ function baseReportFn(infoFn: Function, reportObj:reportObj, data:object, transf
     // 暂存默认参数
     cpReport.params = {...data}
     const pageInfo = infoFn()
-    reportInfoFn({...pageInfo, ...data}, transform, cpReport)
+    augmentReportFn({...pageInfo, ...data}, transform, cpReport, commandReportTypes)
 }
 
 // 事件上报函数
@@ -49,13 +49,6 @@ function eventReportFn(types: string[], maps: object, reportObj:reportObj, data:
         const cpReport = JSON.parse(JSON.stringify(report))
         // 暂存默认参数
         cpReport.params = {...data}
-        maps[item](reportInfoFn, transform[index], cpReport)
+        maps[item](augmentReportFn, transform[index], cpReport, commandReportTypes)
     })
-}
-
-function reportInfoFn(data:Object, transform: Function[], report: reportParams) {
-    report.params = { ...data, ...report.params };
-    // 对数据格式进行操作
-    transformFn(transform, report)
-    reportEventFn(report, commandReportTypes);
 }

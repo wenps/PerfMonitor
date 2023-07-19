@@ -1,6 +1,6 @@
 import { reportParams } from "../../../types/report"
 
-export function getHttpFetchInfo(fn:Function, transform: Function[], report: reportParams) {
+export function getHttpFetchInfo(fn:Function, transform: Function[], report: reportParams, commandReportTypes:string[]) {
     // 劫持fetch
     if (window['fetch'] && typeof window.fetch === 'function') {
         const cpFetch = window.fetch  // 暂存window的fetch
@@ -25,7 +25,7 @@ export function getHttpFetchInfo(fn:Function, transform: Function[], report: rep
             };
 
             // 上报请求相关内容
-            fn(fetchIndex, transform, report)
+            fn(fetchIndex, transform, report, commandReportTypes)
             return res;
           });
         };

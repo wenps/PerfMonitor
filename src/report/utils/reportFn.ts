@@ -1,5 +1,6 @@
 import { EVENT_REPORT_FUNCTION_MAP, IMG, BEACON, AJAX } from "../constant/report";
 import { reportParams } from "../../types/report";
+import { transformFn } from "../../utils/transform";
 
 // 基础上报函数
 export async function reportEvent(params: reportParams, reportType:string[] = [IMG, BEACON, AJAX], ...args:any[]) {
@@ -40,4 +41,11 @@ export function reportEventFn( reportParams:reportParams, reportTypes:string[] =
     } else {
         reportEvent(reportParams, reportTypes)
     }
+}
+
+export function augmentReportFn(data:Object, transform: Function[], report: reportParams, commandReportTypes:string[]) {
+    report.params = { ...data, ...report.params };
+    // 对数据格式进行操作
+    transformFn(transform, report)
+    reportEventFn(report, commandReportTypes);
 }

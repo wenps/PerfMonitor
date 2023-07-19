@@ -1,7 +1,6 @@
 
-import { reportEventFn } from "../../../report"
+import { augmentReportFn } from "../../../report"
 import { reportObj } from "../../../types/report"
-import { transformFn } from "../../../utils/transform"
 import {PERFORMANCE_INDEX_MAP} from "../constant/performance"
 import {USER_EXPERIENCE_INDEX_MAP} from "../constant/userExperience"
 
@@ -14,26 +13,23 @@ let reportMap = {
 
 // 浏览器性能指标 上报
 export function performanceIndexReportFn(types:string[], reportObj: reportObj, data:object, transform: Function[]) {
-    reportFn('performance', types, reportObj, data, transform)
+    IndexReportFn('performance', types, reportObj, data, transform)
 }
 
 // 用户性能指标 上报
 export function userExperienceIndexReportFn(types:string[], reportObj: reportObj, data:object, transform: Function[]) {
-    reportFn('userExperience', types, reportObj, data, transform)
+    IndexReportFn('userExperience', types, reportObj, data, transform)
 }
 
 // 指标上报函数
-function reportFn(key:string, type:string[], reportObj: reportObj, data:object, transform: Function[]) {
+function IndexReportFn(key:string, type:string[], reportObj: reportObj, data:object, transform: Function[]) {
     const { report, reportTypes } = reportObj
     commandReportTypes = reportTypes
     const cpReport = JSON.parse(JSON.stringify(report))
     // 暂存默认参数
     cpReport.params = {...data}
     reportMap[key](type).then((res) => {
-        cpReport.params = {...cpReport.params, ...res}
-        // 对数据格式进行操作
-        transformFn(transform, cpReport)
-        reportEventFn(cpReport, commandReportTypes);
+        augmentReportFn(res, transform, cpReport, commandReportTypes)
     })
 }
 

@@ -34,8 +34,8 @@ export function reportBeaconEvent(params: reportParams, ...args: any[]) {
     return reportEvent(params, [BEACON], ...args)
 }
 
-// core核心上报方法
-export function reportEventFn( reportParams:reportParams, reportTypes:string[] = []) {
+// 校验 reportTypes 的上报函数
+export function reportEventWithTypes( reportParams:reportParams, reportTypes:string[] = []) {
     if (reportTypes.length == 0) {
         reportEvent(reportParams)
     } else {
@@ -43,9 +43,10 @@ export function reportEventFn( reportParams:reportParams, reportTypes:string[] =
     }
 }
 
-export function augmentReportFn(data:Object, transform: Function[], report: reportParams, commandReportTypes:string[]) {
+// 封装 transform 的上报函数
+export function augmentReportFn(data:Object, transform: Function[], report: reportParams, reportTypes:string[]) {
     report.params = { ...data, ...report.params };
     // 对数据格式进行操作
     transformFn(transform, report)
-    reportEventFn(report, commandReportTypes);
+    reportEventWithTypes(report, reportTypes);
 }

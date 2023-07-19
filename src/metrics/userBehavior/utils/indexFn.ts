@@ -1,6 +1,5 @@
-import { augmentReportFn, reportEventFn } from '../../../report'
-import { transformFn } from '../../../utils/transform'
-import {reportObj, reportParams} from '../../../types/report'
+import { augmentReportFn } from '../../../report'
+import {reportObj} from '../../../types/report'
 import { ROUTER_EVENT_MAP, TAG_EVENT_MAP, HTTP_EVENT_MAP, GET_PAGE_INFO, GET_USER_AGENT_INFO } from "../../../metrics/index";
 
 let commandReportTypes = []
